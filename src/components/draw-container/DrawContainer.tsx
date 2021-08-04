@@ -1,8 +1,11 @@
 import React from "react";
 
+import "./draw-container.scss";
+
 interface DrawContainerProps {
   selectedColor: string;
   brushWidth: number;
+  isNeedClear: boolean;
 }
 
 export function DrawContainer(props: DrawContainerProps): JSX.Element {
@@ -33,12 +36,15 @@ export function DrawContainer(props: DrawContainerProps): JSX.Element {
           context.closePath();
         }
       };
+      if (props.isNeedClear) {
+        context.clearRect(0, 0, 700, 500);
+      }
     }
-  }, [props.selectedColor, props.brushWidth]);
+  }, [props.selectedColor, props.brushWidth, props.isNeedClear]);
 
   return (
     <div>
-      <canvas ref={canvas} width="640" height="180"></canvas>
+      <canvas className="canvas" ref={canvas} width="700" height="500"></canvas>
     </div>
   );
 }
